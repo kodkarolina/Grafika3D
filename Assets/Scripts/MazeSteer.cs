@@ -25,8 +25,10 @@ public class MazeSteer : MonoBehaviour {
 	public float MaximumX = 15F;
 	public GameObject ControllText;
 
-
-	private Quaternion targetRot;
+    private volatile float axis_x;
+    private volatile float axis_y;
+    private volatile float axis_z;
+    private Quaternion targetRot;
 
 	void Start () {
 		ControllText.SetActive (false);
@@ -41,20 +43,11 @@ public class MazeSteer : MonoBehaviour {
     }
 
 	void Update () {
-
-        if (message != "")
-        {
-            text.text = message;
-        }
-        else
-        {
-            text.text = "pusto";
-        }
-
+        
         if (KeyboardEnabled) {
 			RotateWithKeyboard ();
 		} else {
-		RotateWithMouse ();
+		    RotateWithPhone ();
 		}
 		if(Input.GetKeyDown(KeyCode.Space)){
 			ToggleControlls ();
@@ -70,7 +63,9 @@ public class MazeSteer : MonoBehaviour {
 	}
 
     void RotateWithPhone(){
-        
+        float xRotation = axis_x;
+        float zRotation = axis_z;
+        Rotate(xRotation, zRotation);
     }
 
     void RotateWithKeyboard()
@@ -125,10 +120,10 @@ public class MazeSteer : MonoBehaviour {
             string axis_y_string = axes[1];
             string axis_z_string = axes[2];
 
-            var axis_x = float.Parse(axis_x_string, CultureInfo.InvariantCulture.NumberFormat);
-            var axis_y = float.Parse(axis_y_string, CultureInfo.InvariantCulture.NumberFormat);
-            var axis_z = float.Parse(axis_z_string, CultureInfo.InvariantCulture.NumberFormat);
-
+            axis_x = float.Parse(axis_x_string, CultureInfo.InvariantCulture.NumberFormat);
+            axis_y = float.Parse(axis_y_string, CultureInfo.InvariantCulture.NumberFormat);
+            axis_z = float.Parse(axis_z_string, CultureInfo.InvariantCulture.NumberFormat);
+            Debug.Log(axes);
         }
     }
 
