@@ -30,10 +30,11 @@ public class MazeSteer : MonoBehaviour {
 
 	void Start () {
 		ControllText.SetActive (false);
+
         m_continue = true;
         text = GetComponent<Text>();
 
-        port = new SerialPort("COM5", 9600);
+        port = new SerialPort("COM9", 9600);
         port.Open();
         readThread = new Thread(Read);
         readThread.Start();
@@ -41,7 +42,16 @@ public class MazeSteer : MonoBehaviour {
 
 	void Update () {
 
-		if (KeyboardEnabled) {
+        if (message != "")
+        {
+            text.text = message;
+        }
+        else
+        {
+            text.text = "pusto";
+        }
+
+        if (KeyboardEnabled) {
 			RotateWithKeyboard ();
 		} else {
 		RotateWithMouse ();
@@ -59,9 +69,8 @@ public class MazeSteer : MonoBehaviour {
 
 	}
 
-    void RotateWithPhone()
-    {
-
+    void RotateWithPhone(){
+        
     }
 
     void RotateWithKeyboard()
