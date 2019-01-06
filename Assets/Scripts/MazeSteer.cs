@@ -25,6 +25,7 @@ public class MazeSteer : MonoBehaviour
     public float MinimumX = -15F;
     public float MaximumX = 15F;
     public GameObject ControllText;
+    public string portNumber;
 
     private volatile float axis_x;
     private volatile float axis_y;
@@ -33,12 +34,12 @@ public class MazeSteer : MonoBehaviour
 
     void Start()
     {
+        portNumber = PlayerPrefs.GetString("choosenPort");
         ControllText.SetActive(false);
 
         m_continue = true;
         text = GetComponent<Text>();
-
-        port = new SerialPort("COM9", 9600);
+        port = new SerialPort(portNumber, 9600);
         port.Open();
         readThread = new Thread(Read);
         readThread.Start();
