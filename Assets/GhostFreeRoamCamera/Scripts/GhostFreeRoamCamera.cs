@@ -3,7 +3,7 @@
 [RequireComponent(typeof(Camera))]
 public class GhostFreeRoamCamera : MonoBehaviour
 {
-    public float initialSpeed = 10f;
+    public float initialSpeed = 5f;
     public float increaseSpeed = 1.25f;
 
     public bool allowMovement = true;
@@ -26,8 +26,8 @@ public class GhostFreeRoamCamera : MonoBehaviour
     {
         if (cursorToggleAllowed)
         {
-            Screen.lockCursor = true;
-            UnityEngine.Cursor.visible = false;
+            Screen.lockCursor = false;
+            UnityEngine.Cursor.visible = true;
         }
     }
 
@@ -73,8 +73,8 @@ public class GhostFreeRoamCamera : MonoBehaviour
                 if (!togglePressed)
                 {
                     togglePressed = true;
-                    Screen.lockCursor = !Screen.lockCursor;
-                    UnityEngine.Cursor.visible = !UnityEngine.Cursor.visible;
+                    //Screen.lockCursor = !Screen.lockCursor;
+                    //UnityEngine.Cursor.visible = !UnityEngine.Cursor.visible;
                 }
             }
             else togglePressed = false;
@@ -82,7 +82,7 @@ public class GhostFreeRoamCamera : MonoBehaviour
         else
         {
             togglePressed = false;
-            UnityEngine.Cursor.visible = false;
+            UnityEngine.Cursor.visible = true;
         }
     }
 
